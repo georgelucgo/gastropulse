@@ -10,6 +10,13 @@ export default function RootLayout() {
         <StatusBar style="dark" />
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="prato/[id]"
+            options={{
+              animation: 'slide_from_right',
+              headerShown: false,
+            }}
+          />
         </Stack>
       </GestureHandlerRootView>
     </SafeAreaProvider>

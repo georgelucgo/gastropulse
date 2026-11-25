@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { Colors, Spacing } from '@/constants/theme';
 import { HomeHeader } from '@/components/home/HomeHeader';
 import { GreetingSection } from '@/components/home/GreetingSection';
@@ -23,6 +24,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH - Spacing.xl * 2;
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('near_you');
   const [dishes, setDishes] = useState<Dish[]>(MOCK_DISHES);
@@ -145,12 +147,10 @@ export default function HomeScreen() {
                   onRedeemCoupon={handleRedeemCoupon}
                   onToggleFavorite={handleToggleFavorite}
                   onPress={() => {
-                    Alert.alert(
-                      dish.name,
-                      `${dish.description}\n\nPreço: R$ ${dish.price
-                        .toFixed(2)
-                        .replace('.', ',')}`
-                    );
+                    router.push({
+                      pathname: '/prato/[id]',
+                      params: { id: dish.id },
+                    });
                   }}
                 />
               </View>
